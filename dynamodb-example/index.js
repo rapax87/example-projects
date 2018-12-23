@@ -40,6 +40,11 @@ api.get('/user/{id}', function (request) {
 	});
 });
 
+api.get('/user', function (request) { // GET all users
+	return dynamoDb.scan({ TableName: request.env.tableName }).promise()
+	   .then(response => response.Items)
+});
+
 // delete user with {id}
 api.delete('/user/{id}', function (request) {
 	'use strict';
